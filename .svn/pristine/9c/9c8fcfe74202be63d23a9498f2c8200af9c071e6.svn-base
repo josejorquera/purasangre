@@ -1,0 +1,37 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+
+<?php echo Form::open(['action' => 'PaymentController@update']); ?>
+
+    <input class="form-control" value="<?php echo e($payment->id); ?>" name="id" type="hidden" hidden>
+    <label>Fecha del pago</label>
+    <input class="form-control" value="<?php echo e($payment->payment_at); ?> " name="payment_at" type="text">
+
+    <label>Detalle</label>
+    <input class="form-control" value="<?php echo e($payment->detail); ?>" name="detail" type="text" >
+
+    <label>Numero de >boleta</label>
+    <input class="form-control" value="<?php echo e($payment->bill_number); ?>" name="bill_number" type="text" >
+
+    <label>ID del Cliente</label>
+    <input class="form-control" value="<?php echo e($payment->client_id); ?>" name="client_id" type="tel" >
+
+    <label>Forma de pago</label>
+    <select class="form-control" name="payment_type_id">
+        <?php $__currentLoopData = $payment_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <option value="<?php echo e($payment_type->id); ?>"><?php echo e($payment_type->name); ?></option>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </select>
+
+    <label>Monto</label>
+    <input class="form-control" value="<?php echo e($payment->amount); ?>" name="amount" type="text" >
+
+    <button class="btn btn-success" type="submit">Guardar cliente</button>
+
+<?php echo Form::close(); ?>
+
+
+
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

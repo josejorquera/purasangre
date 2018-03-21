@@ -1,0 +1,17 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+
+<h1>Detalle de los Pagos</h1>
+
+<p><?php echo e($payment->payment_at); ?></p>
+<p><?php echo e($payment->detail); ?></p>
+<p><?php echo e($payment->bill_number); ?></p>
+<p><?php echo e($payment->client_id); ?></p>
+<p><?php echo e($payment->payment_type_id); ?></p>
+
+<a href="<?php echo e(url('/payment/')); ?>" class="btn btn-info">Volver</a>
+
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

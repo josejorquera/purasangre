@@ -1,0 +1,85 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-md-12">
+			@if(Session::has('welcome'))
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+				   {{Session::get('welcome')}}
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			@endif
+			@if(Session::has('success'))
+
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+				   {{Session::get('success')}}
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+
+			@endif
+
+		<div class="ibox">
+
+		                    <div class="ibox-body">
+		                        {{Form::open(['action' => 'ClientController@indexFilter','class' => 'form-inline'])}}
+		                        <div class="form-group">
+		                            <label style="margin-right: 5px;" >Nombre del cliente</label>
+		                            <input class="form-control mb-2 mr-sm-2 mb-sm-0" id="client" type="text" name="name" value="{{Session::get('name_filter')}}">
+		                        </div>
+
+		                        <button class="btn btn-success" type="submit">Filtrar</button>
+
+		                        {{Form::close()}}
+		                    </div>
+		                </div>
+
+
+		<div class="ibox">
+			<div class="ibox-body">
+				<table class="table table-bordered" style="width:100%">
+				  <thead>
+						<tr>
+					    <th>Rut</th>
+					    <th>Nombre</th>
+					    <th>Apellido</th>
+					    <th>telefono</th>
+					    <th>email</th>
+					    <th></th>
+					  </tr>
+				  </thead>
+
+				  @foreach($clients as $client)
+				 	<tbody>
+						<tr>
+						 <td>{{$client->rut}}</td>
+						 <td>{{$client->first_name}}</td>
+						 <td>{{$client->last_name}}</td>
+						 <td>{{$client->phone}}</td>
+						 <td>{{$client->email}}</td>
+						 <td>
+							 <a href="{{url('/client/show/'.$client->id)}}" class="btn btn-outline-success">Mostrar</a>
+							 <a href="{{url('/client/edit/'.$client->id)}}" class="btn btn-outline-info">Editar</a>
+							 <a href="{{url('/payment/add/client/'.$client->id)}}" class="btn btn-info">Agregar pago</a>
+							 <a href="{{url('/client/delete/'.$client->id)}}" class="btn btn-danger">Eliminar</a>
+						 </td>
+
+					 </tr>
+				 	</tbody>
+				  @endforeach
+
+				</table>
+			</div>
+		</div>
+		</div>
+
+	</div>
+
+</div>
+@endsection

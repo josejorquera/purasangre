@@ -1,0 +1,69 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+    @if(count($errors->all())!=0)
+     <ul class="alert alert-warning">
+       {{-- @foreach($errors->all() as $error) --}}
+         <li >{!! $errors->first() !!}</li>
+     {{--   @endforeach --}}
+     </ul>
+     @endif
+
+    <div class="ibox">
+      <div class="ibox-head">
+        <div class="ibox-title">
+          Agregar Pago
+        </div>
+      </div>
+      <div class="ibox-body">
+        {!! Form::open(['action' => 'PaymentController@create']) !!}
+
+            <label>Nombre del Cliente</label>
+            <p><strong>{{$client->first_name}} {{$client->last_name}}</strong></p>
+            {{-- <a class="form-control" name="client" value="{{$client->id}}">{{$client->first_name}} {{$client->last_name}}></a> --}}
+            <label>Fecha del Pago</label>
+            <input class="form-control" name="payment_at" type="date">
+             <label>Detalle</label>
+            <input class="form-control" name="detail" type="text" >
+            <label>Numero de la Boleta</label>
+            <input class="form-control" name="bill_number" type="number" >
+
+            <input class="form-control" name="client_id" value="{{$client->id}}" type="hidden" hidden>
+          {{--   <label>Nombre del Cliente</label>
+            <select class="form-control" name="client_id">
+                @foreach($clients as $client)
+                <option value="{{$client->id}}">{{$client->first_name}} {{$client->last_name}}</option>
+                @endforeach
+            </select> --}}
+
+            <label>Forma de Pago</label>
+
+            <select class="form-control" name="payment_type_id">
+                @foreach($payment_types as $payment_type)
+                <option value="{{$payment_type->id}}">{{$payment_type->name}}</option>
+                @endforeach
+            </select>
+
+            <label>Monto</label>
+            <input class="form-control" name="amount" type="number" >
+
+
+        <br>
+            <button class="btn btn-success" type="submit">Guardar Pago</button>
+
+        {!! Form::close() !!}
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+</div>
+@endsection

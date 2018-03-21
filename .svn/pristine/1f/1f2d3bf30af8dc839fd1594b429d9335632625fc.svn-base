@@ -1,0 +1,44 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+
+    <?php if(Session::has('success')): ?>
+    
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+           <?php echo e(Session::get('success','hola')); ?>
+
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            
+    <?php endif; ?>
+<h1>Registro de Pagos</h1>
+<table class="table" style="width:100%">
+  <tr>
+    <th>Fecha del Pago</th>
+    <th>Detalle</th>
+    <th>N° boleta</th>  
+    <th>Nombre del Cliente</th>
+    <th>Forma de Pago</th>
+    <th>Monto</th>
+  </tr>
+
+  <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+  <tr>
+    <td><?php echo e($payment->payment_at); ?></td>
+    <td><?php echo e($payment->detail); ?></td> 
+    <td><?php echo e($payment->bill_number); ?></td>
+    <td><a href="<?php echo e(url('/client/show/'.$payment->client->id)); ?>"><?php echo e($payment->client->first_name); ?> <?php echo e($payment->client->last_name); ?> </a></td>
+    <td><?php echo e($payment->payment_type->name); ?></td>
+    <td><?php echo e($payment->amount); ?></td>
+    <td><a href="<?php echo e(url('/payment/show/'.$payment->id)); ?>" class="btn btn-success">Mostrar</a></td>
+    <td><a href="<?php echo e(url('/payment/edit/'.$payment->id)); ?>" class="btn btn-info">Editar</a></td>
+    <td><a href="<?php echo e(url('/payment/delete/'.$payment->id)); ?>" class="btn btn-danger">Eliminar</a></td>
+  </tr>
+  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+</table>
+
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

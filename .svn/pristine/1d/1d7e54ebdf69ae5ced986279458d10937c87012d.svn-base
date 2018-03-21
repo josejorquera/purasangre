@@ -1,0 +1,60 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+    <div class="row justify-content-center">
+
+      <div class="col-md-8">
+
+        {{-- errores --}}
+        @if(count($errors->all())!=0)
+        <ul class="alert alert-warning">
+          {{-- @foreach($errors->all() as $error) --}}
+            <li >{!! $errors->first() !!}</li>
+        {{--   @endforeach --}}
+        </ul>
+        @endif
+        {{-- fin errores --}}
+
+        <div class="ibox">
+          <div class="ibox-head">
+            <div class="ibox-title">Agregar Cliente</div>
+          </div>
+          <div class="ibox-body">
+            {!! Form::open(['action' => 'ClientController@create']) !!}
+                <label>Rut</label>
+                <input class="form-control" name="rut" type="text">
+                <label>Nombres</label>
+                <input class="form-control" name="first_name" type="text" >
+                <label>Apellidos</label>
+                <input class="form-control" name="last_name" type="text" >
+                <label>Telefono</label>
+                <input class="form-control" name="phone" type="tel" >
+                <label>Email</label>
+                <input class="form-control" name="email" type="email" >
+                <label>Dirección</label>
+                <input class="form-control" name="address" type="text" >
+                <label>Fecha de nacimiento</label>
+                <input class="form-control" name="birthdate" type="date" >
+                <label>Tipo de plan</label>
+
+                <select class="form-control" name="plan_id">
+                    @foreach($plans as $plan)
+                    <option value="{{$plan->id}}">{{$plan->name}}</option>
+                    @endforeach
+                </select>
+                <br>
+
+                <button class="btn btn-success" type="submit">Guardar cliente</button>
+
+            {!! Form::close() !!}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+</div>
+@endsection

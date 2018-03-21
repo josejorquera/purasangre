@@ -1,0 +1,17 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+<h1>Detalle de los Pagos</h1>
+
+<p>{{$payment->payment_at}}</p>
+<p>{{$payment->detail}}</p>
+<p>{{$payment->bill_number}}</p>
+<p>{{$payment->client_id}}</p>
+<p>{{$payment->payment_type_id}}</p>
+
+<a href="{{url('/payment/')}}" class="btn btn-info">Volver</a>
+
+</div>
+@endsection

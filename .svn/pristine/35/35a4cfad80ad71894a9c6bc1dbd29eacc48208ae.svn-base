@@ -1,0 +1,41 @@
+{{-- $client - modelo del clientes --}}
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-lg-4">
+			<h1>{{$client->first_name}} {{$client->last_name}}</h1>
+			<p>{{$client->rut}}</p>
+			<p>{{$client->phone}}</p>
+			<p>{{$client->email}}</p>
+			<p>{{$client->address}}</p>
+			<p>{{$client->birthdate}}</p>
+			<p>{{$client->registered_at}}</p>
+			<p>{{$client->plan->name}}</p>
+		</div>
+		<div class="col-md-8 col-lg-8">
+			<table class="table" style="width:100%">
+			<tr>
+    				<th>Fecha del Pago</th>
+   			 		<th>N° Boleta</th>
+   			 		<th>Detalle</th>
+    				<th>Forma de Pago</th>
+    				<th>Monto</th>
+  			</tr>
+				@foreach ($client->payments as $payment)
+			<tr>
+				<td>{{$payment->payment_at}}</td>
+				<td>{{$payment->bill_number}}</td>
+				<td>{{$payment->detail}}</td>
+				<td>{{$payment->payment_type->name}}</td>
+				<td>{{$payment->amount}}</td>
+			</tr>
+				@endforeach
+			</table>
+		</div>
+	</div>
+	<a href="{{url('/client/')}}" class="btn btn-info">Volver</a>
+</div>
+@endsection

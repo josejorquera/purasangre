@@ -1,0 +1,39 @@
+<?php $__env->startSection('content'); ?>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-lg-4">
+			<h1><?php echo e($client->first_name); ?> <?php echo e($client->last_name); ?></h1>
+			<p><?php echo e($client->rut); ?></p>
+			<p><?php echo e($client->phone); ?></p>
+			<p><?php echo e($client->email); ?></p>
+			<p><?php echo e($client->address); ?></p>
+			<p><?php echo e($client->birthdate); ?></p>
+			<p><?php echo e($client->registered_at); ?></p>
+			<p><?php echo e($client->plan->name); ?></p>
+		</div>
+		<div class="col-md-8 col-lg-8">
+			<table class="table" style="width:100%">
+			<tr>
+    				<th>Fecha del Pago</th>
+   			 		<th>N° Boleta</th>
+   			 		<th>Detalle</th>
+    				<th>Forma de Pago</th>
+    				<th>Monto</th>
+  			</tr>
+				<?php $__currentLoopData = $client->payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			<tr>
+				<td><?php echo e($payment->payment_at); ?></td>
+				<td><?php echo e($payment->bill_number); ?></td>
+				<td><?php echo e($payment->detail); ?></td>
+				<td><?php echo e($payment->payment_type->name); ?></td>
+				<td><?php echo e($payment->amount); ?></td>
+			</tr>
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+			</table>
+		</div>
+	</div>
+	<a href="<?php echo e(url('/client/')); ?>" class="btn btn-info">Volver</a>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,43 @@
+/* HEADER */
+
+.user-name {
+  border-right: 1px solid rgba(255,255,255,.1);
+  padding-right: 16px;
+}
+
+.auth-head-icon {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background-color: #fff;
+  color: #5c6bc0;
+  box-shadow: 0 5px 20px #d6dee4;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    outline: none;
+    border: none;
+}
+
+.form-control {
+  background: #fff; !important
+  border-bottom: solid 1px rgba(255,255,255,.1);
+  transition: all ease 0.4s;
+}
+
+.form-control-line {
+  border-width: 0 0 1px 0;
+  padding-left: 0;
+}
+
+.form-control:focus {
+  border-bottom: solid 1px #5c6bc0;
+}

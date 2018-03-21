@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+    @if(Session::has('success'))
+    
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+           {{Session::get('success','hola')}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            
+    @endif
+<h1>Registro de Pagos</h1>
+<table class="table" style="width:100%">
+  <tr>
+    <th>Fecha del Pago</th>
+    <th>Detalle</th>
+    <th>N° boleta</th>  
+    <th>Nombre del Cliente</th>
+    <th>Forma de Pago</th>
+    <th>Monto</th>
+  </tr>
+
+  @foreach($payments as $payment)
+  <tr>
+    <td>{{$payment->payment_at}}</td>
+    <td>{{$payment->detail}}</td> 
+    <td>{{$payment->bill_number}}</td>
+    <td><a href="{{url('/client/show/'.$payment->client->id)}}">{{$payment->client->first_name}} {{$payment->client->last_name}} </a></td>
+    <td>{{$payment->payment_type->name}}</td>
+    <td>{{$payment->amount}}</td>
+    <td><a href="{{url('/payment/show/'.$payment->id)}}" class="btn btn-success">Mostrar</a></td>
+    <td><a href="{{url('/payment/edit/'.$payment->id)}}" class="btn btn-info">Editar</a></td>
+    <td><a href="{{url('/payment/delete/'.$payment->id)}}" class="btn btn-danger">Eliminar</a></td>
+  </tr>
+  @endforeach
+
+</table>
+
+</div>
+@endsection
